@@ -67,17 +67,8 @@ rs.initiate(
 - One is elected to become the `PRIMARY` and the other two become `SECONDARY` instances
 - The Docker healthcheck config is used to cause the initialisation of the replica set. More info in the further reading links.
 
-## Robo 3T
-I used Robo 3T to test it locally and used the following config for the connection:
-
-![Robo 3T Config](https://github.com/UpSync-Dev/docker-compose-mongo-replica-set/raw/main/robo-3t.png)
 
 ## Connecting with URI
 ```
 mongodb://mongo1:30001,mongo2:30002,mongo3:30003/?replicaSet=my-replica-set
 ```
-
-## Thanks / Further Reading
-- [How to turn standalone MongoDB server into a replica set with Docker-Compose](https://zgadzaj.com/development/docker/docker-compose/turning-standalone-mongodb-server-into-a-replica-set-with-docker-compose)
-- [Creating a MongoDB replica set using Docker 🍃](https://www.sohamkamani.com/blog/2016/06/30/docker-mongo-replica-set/)
-- [asoorm/docker-compose-mongo-replicaset.yml](https://gist.github.com/asoorm/7822cc742831639c93affd734e97ce4f)

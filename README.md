@@ -7,8 +7,7 @@
 * [How do I run the Replica Set?](#how-do-i-run-the-replica-set)
 * [How do I access the Mongo Shells for each Instance?](#how-do-i-access-the-mongo-shells-for-each-instance)
 * [How does it work?](#how-does-it-work)
-* [Robo 3T](#robo-3t)
-* [Thanks / Further Reading](#thanks--further-reading)
+* [ToDo](#ToDo)
 
 ## Disclaimer
 > :warning: **This setup is purely for local development purposes.**
@@ -73,3 +72,6 @@ rs.initiate(
 ```
 mongodb://mongo1:30001,mongo2:30002,mongo3:30003/?replicaSet=my-replica-set
 ```
+
+## To Do
+- Shutdown the replica-set and mantein the data in a healthy status before the `docker-compose down`

@@ -22,7 +22,7 @@ This `docker-compose` setup starts a local mongo replica set with 3 instances ru
 
 ## Versions
 * Different versions are available to cater for the various major versions of Mongo
-* You can find the most suitable one by looking at the [tags](https://github.com/UpSync-Dev/docker-compose-mongo-replica-set/tags) or [releases](https://github.com/UpSync-Dev/docker-compose-mongo-replica-set/releases) 
+* You can find the most suitable one by looking at the [tags](https://hub.docker.com/_/mongo/tags) or [mongo docker hub](https://hub.docker.com/_/mongo) 
 
 ## Are there any prerequisites? 
 * Docker

@@ -30,6 +30,7 @@ This `docker-compose` setup starts a local mongo replica set with 3 instances ru
 * Docker Compose
 * The following in your `/etc/hosts` file:
 ```
+127.0.0.1       host.docker.internal
 127.0.0.1       mongo1
 127.0.0.1       mongo2
 127.0.0.1       mongo3

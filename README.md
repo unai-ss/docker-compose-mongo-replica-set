@@ -43,9 +43,9 @@ docker-compose up -d
 
 ## How do I access the Mongo Shells for each Instance?
 ```
-docker exec -it mongo1 sh -c "mongo --port 30001"
-docker exec -it mongo2 sh -c "mongo --port 30002"
-docker exec -it mongo3 sh -c "mongo --port 30003"
+docker exec -it mongo1 sh -c "mongosh --port 30001"
+docker exec -it mongo2 sh -c "mongosh --port 30002"
+docker exec -it mongo3 sh -c "mongosh --port 30003"
 ```
 
 ## How does it work?

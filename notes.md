@@ -8,3 +8,17 @@
       - ./data/mongosync:/data/mongosync
     extra_hosts:
       - "host.docker.internal:host-gateway"
+
+
+          command:
+      - sh -c  "mongosync  --config /data/mongosync/mongosync.conf"
+
+
+troubleshooting
+      https://support.mongodb.com/case/01094019?c__ccId=CC-3536482
+
+
+    command: [mongosync, --config, /data/mongosync/mongosync.conf]
+
+apt-get update
+apt install iputils-ping

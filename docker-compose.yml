@@ -30,7 +30,7 @@ services:
   mongoa3:
     image: mongo:latest
     container_name: mongoa3
-    command: ["--replSet", "my-replica-set", "--bind_ip_all", "--port", "30003"]
+    command: ["--replSet", "src-replica-set", "--bind_ip_all", "--port", "30003"]
     volumes:
       - ./data/mongoa-3:/data/db
     ports:
@@ -41,7 +41,7 @@ services:
   mongob1:
     image: mongo:latest
     container_name: mongob1
-    command: ["--replSet", "dst-replica-set", "--bind_ip_all", "--port", "30001"]
+    command: ["--replSet", "dst-replica-set", "--bind_ip_all", "--port", "30011"]
     volumes:
       - ./data/mongob-1:/data/db
     ports:
@@ -49,14 +49,14 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     healthcheck:
-      test: test $$(echo "rs.initiate({_id:'dst-replica-set',members:[{_id:0,host:\"mongob1:30001\"},{_id:1,host:\"mongob2:30002\"},{_id:2,host:\"mongob3:30003\"}]}).ok || rs.status().ok" | mongosh --port 30001 --quiet) -eq 1
+      test: test $$(echo "rs.initiate({_id:'dst-replica-set',members:[{_id:0,host:\"mongob1:30011\"},{_id:1,host:\"mongob2:30012\"},{_id:2,host:\"mongob3:30013\"}]}).ok || rs.status().ok" | mongosh --port 30011 --quiet) -eq 1
       interval: 10s
       start_period: 30s
 
   mongob2:
     image: mongo:latest
     container_name: mongob2
-    command: ["--replSet", "dst-replica-set", "--bind_ip_all", "--port", "30002"]
+    command: ["--replSet", "dst-replica-set", "--bind_ip_all", "--port", "30012"]
     volumes:
       - ./data/mongob-2:/data/db
     ports:
@@ -67,7 +67,7 @@ services:
   mongob3:
     image: mongo:latest
     container_name: mongob3
-    command: ["--replSet", "my-replica-set", "--bind_ip_all", "--port", "30003"]
+    command: ["--replSet", "dst-replica-set", "--bind_ip_all", "--port", "30013"]
     volumes:
       - ./data/mongob-3:/data/db
     ports:
@@ -75,15 +75,16 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
 
-  mongosync3:
+  mongosync:
     platform: linux/amd64
     image: mongosync-1.6.1:1.0
     tty: true
     build:
       context: .
       dockerfile: Dockerfile
-    hostname: mongosync3
-    container_name: mongosync3
+    hostname: mongosync
+    command: [mongosync, --config, /data/mongosync/mongosync.conf]
+    container_name: mongosync
     volumes:
       - ./data/mongotools:/data/mongosync
     ports:

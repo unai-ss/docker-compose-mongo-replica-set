@@ -1,39 +1,84 @@
 version: "3.8"
 
 services:
-  mongo1:
+  mongoa1:
     image: mongo:latest
-    container_name: mongo1
-    command: ["--replSet", "my-replica-set", "--bind_ip_all", "--port", "30001"]
+    container_name: mongoa1
+    command: ["--replSet", "src-replica-set", "--bind_ip_all", "--port", "30001"]
     volumes:
-      - ./data/mongo-1:/data/db
+      - ./data/mongoa-1:/data/db
     ports:
       - 30001:30001
     extra_hosts:
       - "host.docker.internal:host-gateway"
     healthcheck:
-      test: test $$(echo "rs.initiate({_id:'my-replica-set',members:[{_id:0,host:\"mongo1:30001\"},{_id:1,host:\"mongo2:30002\"},{_id:2,host:\"mongo3:30003\"}]}).ok || rs.status().ok" | mongosh --port 30001 --quiet) -eq 1
+      test: test $$(echo "rs.initiate({_id:'src-replica-set',members:[{_id:0,host:\"mongoa1:30001\"},{_id:1,host:\"mongoa2:30002\"},{_id:2,host:\"mongoa3:30003\"}]}).ok || rs.status().ok" | mongosh --port 30001 --quiet) -eq 1
       interval: 10s
       start_period: 30s
 
-  mongo2:
+  mongoa2:
     image: mongo:latest
-    container_name: mongo2
-    command: ["--replSet", "my-replica-set", "--bind_ip_all", "--port", "30002"]
+    container_name: mongoa2
+    command: ["--replSet", "src-replica-set", "--bind_ip_all", "--port", "30002"]
     volumes:
-      - ./data/mongo-2:/data/db
+      - ./data/mongoa-2:/data/db
     ports:
       - 30002:30002
     extra_hosts:
       - "host.docker.internal:host-gateway"
 
-  mongo3:
+  mongoa3:
     image: mongo:latest
-    container_name: mongo3
+    container_name: mongoa3
     command: ["--replSet", "my-replica-set", "--bind_ip_all", "--port", "30003"]
     volumes:
-      - ./data/mongo-3:/data/db
+      - ./data/mongoa-3:/data/db
     ports:
       - 30003:30003
     extra_hosts:
       - "host.docker.internal:host-gateway"
+
+  mongob1:
+    image: mongo:latest
+    container_name: mongob1
+    command: ["--replSet", "dst-replica-set", "--bind_ip_all", "--port", "30001"]
+    volumes:
+      - ./data/mongob-1:/data/db
+    ports:
+      - 30011:30011
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    healthcheck:
+      test: test $$(echo "rs.initiate({_id:'dst-replica-set',members:[{_id:0,host:\"mongob1:30001\"},{_id:1,host:\"mongob2:30002\"},{_id:2,host:\"mongob3:30003\"}]}).ok || rs.status().ok" | mongosh --port 30001 --quiet) -eq 1
+      interval: 10s
+      start_period: 30s
+
+  mongob2:
+    image: mongo:latest
+    container_name: mongob2
+    command: ["--replSet", "dst-replica-set", "--bind_ip_all", "--port", "30002"]
+    volumes:
+      - ./data/mongob-2:/data/db
+    ports:
+      - 30012:30012
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  mongob3:
+    image: mongo:latest
+    container_name: mongob3
+    command: ["--replSet", "my-replica-set", "--bind_ip_all", "--port", "30003"]
+    volumes:
+      - ./data/mongob-3:/data/db
+    ports:
+      - 30013:30013
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  mongosync3:
+    image: mongosync-1.6.1:1.0
+    build:
+      context: .
+      dockerfile: Dockerfile
+    hostname: mongosync3
+    container_name: mongosync3

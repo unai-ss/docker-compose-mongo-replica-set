@@ -76,7 +76,9 @@ services:
       - "host.docker.internal:host-gateway"
 
   mongosync3:
+    platform: linux/amd64
     image: mongosync-1.6.1:1.0
+    tty: true
     build:
       context: .
       dockerfile: Dockerfile

@@ -84,7 +84,7 @@ services:
       dockerfile: Dockerfile
     hostname: mongosync3
     container_name: mongosync3
-    dvolumes:
+    volumes:
       - ./data/mongotools:/data/mongosync
     ports:
       - 27182:27182

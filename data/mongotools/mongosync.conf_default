@@ -1,0 +1,4 @@
+cluster0: "mongodb://mongoa1:30001,mongoa2:30002,mongoa3:30003/?replicaSet=src-replica-set"
+cluster1: "mongodb://mongob1:30011,mongob2:30012,mongob3:30013/?replicaSet=dst-replica-set"
+logPath: "/data/mongosync/logs"
+verbosity: "TRACE"

@@ -63,6 +63,10 @@ docker exec -it mongob1 sh -c "mongosh --port 30011"
 docker exec -it mongob2 sh -c "mongosh --port 30012"
 docker exec -it mongob3 sh -c "mongosh --port 30013"
 ```
+* How to access to the Mongosync Instance
+```
+docker exec -it mongosync /bin/bash
+```
 
 ## How does it work?
 - Starts three instances of Mongo

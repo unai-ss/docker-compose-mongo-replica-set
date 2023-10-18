@@ -87,6 +87,13 @@ rs.initiate(
 - One is elected to become the `PRIMARY` and the other two become `SECONDARY` instances
 - The Docker healthcheck config is used to cause the initialisation of the replica set. More info in the further reading links.
 
+## End to End example
+
+[PoC - End to End example](PoC-EndToEnd.md)
+
+Prerequisites to run the End to End example
+
+1.- [mgodatagen tool](https://github.com/feliixx/mgodatagen)
 
 ## Connecting with URI
 * src-replica-set

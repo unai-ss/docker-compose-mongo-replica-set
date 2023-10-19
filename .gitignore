@@ -5,5 +5,6 @@ data/mongob-1/
 data/mongob-2/
 data/mongob-3/
 data/mongotools/logs/
-clean_repro
+clean_repro/
+mongosync_monitor-main/
 notes.md

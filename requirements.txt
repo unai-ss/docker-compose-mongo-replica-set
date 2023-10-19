@@ -1,0 +1,6 @@
+pymongo
+requests
+datetime
+docopt
+
+

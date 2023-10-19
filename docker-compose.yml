@@ -87,6 +87,7 @@ services:
     container_name: mongosync
     volumes:
       - ./data/mongotools:/data/mongosync
+      - ./clean_repro/mongosync_monitor-main:/mongosync_monitor
     ports:
       - 27182:27182
     extra_hosts:

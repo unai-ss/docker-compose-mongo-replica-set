@@ -127,3 +127,35 @@ mongosh "mongodb://mongoa1:30001,mongoa2:30002,mongoa3:30003/?replicaSet=src-rep
 ```
 mongosh "mongodb://mongob1:30011,mongob2:30012,mongob3:30013/?replicaSet=dst-replica-set"
 ```
+
+
+### Todo
+
+- improve the monitor help  config
+
+``` 
+./mongosync_monitor-logHelper.py save -d shdest.0mfal.mongodb.net -u mongosync -p mongosync --port 27017 --log ~/MigrationFactory/DraftKings/mongosync_logs/Jodel/mongosyncv2-atlas-ahq5ki-shard-0-6cf64fd7c9-rlfg4.log
+```
+en el codigo uso el srv para la URI, pero si quieres modificarlo para que funcione más fácil sin problema
+
+```
+MDB_URI = "mongodb+srv://" + args['--user'][0] + ":" + args['--password'][0] + "@" + args['--destination'][0]
+```
+
+port es para el puerto pero cierto creo que no lo uso de hecho :smile:
+ah si, aquí
+```
+client = pymongo.MongoClient(MDB_URI, MDB_PORT)
+```
+
+
+### Repro 1 attempt
+
+* collection 1  307M documents _id double  `  { _id: 2.281029756386403e-9 },` (e.g), repro with a 10% 
+* collection 2  106M documents _id double, repro with a 10%
+
+Resources 10 CPU (maximum value in my laptop)
+Memory 24 Gb.
+Swap 1Gb.
+
+no monitor_helper installed.
